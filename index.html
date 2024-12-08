@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBAC UI</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/scripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Role-Based Access Control</h1>
+        <h2>Users</h2>
+        <ul id="user-list">
+            {% for user in users %}
+            <li>
+                {{ user.username }}
+                <button onclick="showAssignRole({{ user.id }})">Assign Role</button>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Roles</h2>
+        <ul id="role-list">
+            {% for role in roles %}
+            <li>{{ role.name }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Permissions</h2>
+        <ul id="permission-list">
+            {% for permission in permissions %}
+            <li>{{ permission.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="assign-role-modal" class="modal">
+        <div class="modal-content">
+            <h2>Assign Role</h2>
+            <form id="assign-role-form">
+                <select name="role_id" id="role-select">
+                    {% for role in roles %}
+                    <option value="{{ role.id }}">{{ role.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Assign</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
